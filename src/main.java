@@ -40,13 +40,13 @@ abstract class Banking implements ActionListener {
             main_frame.setVisible(true);
 
             JPanel title_panel = new JPanel();
-            title_panel.setBounds(0, 0, 600, 70);
+            title_panel.setBounds(0, 20, 600, 70);
             main_frame.add(title_panel);
             title.setFont(font);
             title_panel.add(title);
 
             JPanel main_panel = new JPanel(new GridBagLayout());
-            main_panel.setBounds(0, 67, 600, 300);
+            main_panel.setBounds(0, 50, 600, 330);
             main_panel.setBorder(raised);
             main_frame.add(main_panel);
 
@@ -56,6 +56,7 @@ abstract class Banking implements ActionListener {
             constraints.gridx = 0;
             constraints.gridy = 0;
 
+            current_balance_display.setPreferredSize(new Dimension(300, 40));
             main_panel.add(current_balance_display, constraints);
 
             constraints.gridy = 1;
@@ -134,9 +135,10 @@ abstract class Banking implements ActionListener {
                         enter_amount.setEnabled(false);
                     }
             });
-            another_transaction.addActionListener((ActionListener) ->
-                    enter_amount.setEnabled(true)
-            );
+            another_transaction.addActionListener((ActionListener) -> {
+                enter_amount.setEnabled(true);
+                another_transaction.setVisible(false);
+            });
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
